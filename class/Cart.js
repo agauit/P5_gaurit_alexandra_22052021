@@ -8,16 +8,42 @@
  * @param {float} donnees.price
  */
 
-export default class Cart {
-    constructor(donnees, quantity) {
-        this._id = undefined;
-        this.imageUrl = undefined;
-        this.name = undefined;
-        this.description = undefined;
-        this.price = undefined;
-        this.quantity = quantity;
+import Product from "./Product.js";
 
-        Object.assign(this, donnees);
+export default class Cart {
+
+    constructor() {
+        let content = localStorage.getItem("cart");
+        if (content){
+            this.content = JSON.parse(content);
+        }
+        else {
+            this.content = [];
+            this._updateLocalStorage();
+        }
+    }
+
+    /**
+     *
+     * @param {Product} product
+     */
+    add(product){
+        this.content.forEach(productInCart => {
+            console.log(productInCart._id, product._id);
+            if(productInCart._id === product._id){
+                productInCart.quantity += product.quantity;
+                this._updateLocalStorage();
+                
+            }
+        });
+        this.content.push(product);
+        this._updateLocalStorage();
+        console.log(product, this);
+
+    }
+
+    _updateLocalStorage(){
+        localStorage.setItem("cart", JSON.stringify(this.content));
     }
 
 }

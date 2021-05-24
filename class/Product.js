@@ -17,21 +17,18 @@ export default class Product {
         this.name = undefined;
         this.description = undefined;
         this.price = undefined;
+        this.quantity = 1;
 
         Object.assign(this, donnees);
     }
 
     _onProductClick() {
         console.log("on doit ajouter le produit : ", this);
-        // const cart = new Cart();
-        // // cart.add(this);
-        // console.log(cart);
-
-        //On crée une variable qui défini la clé et renvoie ses values
-        let productOnLocalStorage = [];
-            productOnLocalStorage.push(this);
-            localStorage.setItem("produit" , JSON.stringify(productOnLocalStorage));
-            console.log(productOnLocalStorage);
+        // const selectQuantity = document.getElementById("select-quantity");
+        // this.quantity = selectQuantity.value;
+        const cart = new Cart();
+        console.log(cart);
+        cart.add(this);
 
     }
 
