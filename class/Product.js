@@ -27,7 +27,6 @@ export default class Product {
         // const selectQuantity = document.getElementById("select-quantity");
         // this.quantity = selectQuantity.value;
         const cart = new Cart();
-        console.log(cart);
         cart.add(this);
 
     }
